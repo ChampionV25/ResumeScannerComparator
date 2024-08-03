@@ -68,6 +68,7 @@ Resume Scanner is a Python script that compares a resume against a job descripti
 ## Modifications
 
 - Modified the repository to create a HTML plugin from the source python code, which can be used to scan for keywords in .pdf or .docx files uploaded onto a web interface.
+    - Also updated the Python code in 'resumeScanner.py' by making it more effecient, less resource-intensive, and by fixing 2 bugs.     
 
 - Added the "Frontend (HTML)" file to create a folder named templates and within it, create a file named index.html for the frontend interface.
 
