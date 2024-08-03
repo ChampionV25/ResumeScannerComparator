@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resume Matcher</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f4f4f4;
+        }
+        .container {
+            max-width: 600px;
+            margin: auto;
+            padding: 20px;
+            background: white;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            text-align: center;
+        }
+        input, button {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            box-sizing: border-box;
+        }
+        button {
+            background-color: #5cb85c;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #4cae4c;
+        }
+        .results {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Resume Matcher</h1>
+        <form id="resume-form">
+            <label for="job_url">Job URL:</label>
+            <input type="url" id="job_url" name="job_url" required>
+            <label for="resume_file">Upload Resume:</label>
+            <input type="file" id="resume_file" name="resume_file" accept=".pdf,.docx" required>
+            <button type="submit">Submit</button>
+        </form>
+        <div class="results" id="results"></div>
+    </div>
+    <script>
+        document.getElementById('resume-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const formData = new FormData(this);
+            fetch('/process', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                const resultsDiv = document.getElementById('results');
+                if (data.error) {
+                    resultsDiv.innerHTML = `<p>${data.error}</p>`;
+                } else {
+                    resultsDiv.innerHTML = `
+                        <p>Matching Score: ${data.matching_score.toFixed(2)}</p>
+                        <p>Resume Keywords: ${data.resume_keywords.join(', ')}</p>
+                        <p>Job Keywords: ${data.job_keywords.join(', ')}</p>
+                        <p>Matching Keywords: ${data.matching_keywords.join(', ')}</p>
+                    `;
+                }
+            });
+        });
+    </script>
+</body>
+</html>
