@@ -65,3 +65,16 @@ Resume Scanner is a Python script that compares a resume against a job descripti
 
 - The script currently supports PDF and DOCX resume formats. If you need to support other file formats, you can add the corresponding extraction functions in the script.
 
+## Modifications
+
+- Modified the repository to create a HTML plugin from the source python code, which can be used to scan for keywords in .pdf or .docx files uploaded onto a web interface.
+
+- Added the "Frontend (HTML)" file to create a folder named templates and within it, create a file named index.html for the frontend interface.
+
+- Added the "Flask Set-Up" file to to set up the  Flask application. Install Flask and the required packages using pip.
+
+- Added the "Backend (Flask App)" file for the backend logic.
+
+- Added the "App Execution" file to run the Flask application.
+
+- Final step is to navigate to 'http://127.0.0.1:5000/' in your browser.
